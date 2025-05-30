@@ -1,282 +1,214 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
+import { X } from 'lucide-react';
+
+// Custom CSS for slide-up animation
+const slideUpAnimation = `
+  @keyframes slideUp {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
+`;
 
 const Navbar = () => {
-  const [isClient, setIsClient] = useState(false);
+  const [isSubscriptionOpen, setIsSubscriptionOpen] = useState(false);
+  const [email, setEmail] = useState('');
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  const handleSubscribe = async () => {
+    if (!email || !isChecked) return;
+    
+    setIsLoading(true);
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    setIsSubscribed(true);
+    setIsLoading(false);
+    
+    // Close modal after 2 seconds
+    setTimeout(() => {
+      closeSubscriptionModal();
+    }, 2000);
+  };
+
+  const closeSubscriptionModal = () => {
+    setIsSubscriptionOpen(false);
+    setIsSubscribed(false);
+    setEmail('');
+    setIsChecked(false);
+  };
+
+  const openSubscriptionModal = () => {
+    setIsSubscriptionOpen(true);
+  };
 
   return (
     <>
-      <nav className={`${styles.navbar}`}>
-        <div className={styles.navContainer}>
-          <div className={styles.navLeft}>
-            <Link href="/" className={styles.brand}>
-              ZENTARA
-            </Link>
-          </div>
-          <div className={styles.navRight}>
-            <ul className={styles.navLinks}>
-              <li className={styles.navItem}>
-                <Link href="/technology" className={styles.navLink}>
-                  Technology
-                </Link>
-              </li>
-              <li className={styles.navItem}>
-                <Link href="/carrier" className={styles.navLink}>
-                  Carrier
-                </Link>
-              </li>
-              <li className={styles.navItem}>
-                <Link href="/subscribe" className={`${styles.navLink} ${styles.subscribeBtn}`}>
-                  Subscribe
-                </Link>
-              </li>
-            </ul>
+      {/* Inject custom CSS */}
+      <style jsx>{slideUpAnimation}</style>
+      
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/95 border-b border-white/10 backdrop-blur-xl h-[70px] min-h-[70px]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+          <div className="flex justify-between items-center h-full">
+            
+            {/* Left side - Brand */}
+            <div className="flex items-center">
+              <Link
+                href="/"
+                className="text-white text-xl sm:text-2xl font-semibold tracking-wide hover:scale-105 transition-transform duration-300"
+              >
+                ZENTARA
+              </Link>
+            </div>
+            
+            {/* Right side - Navigation Links */}
+            <div className="flex items-center">
+              <ul className="flex items-center space-x-4 sm:space-x-6 lg:space-x-8">
+                
+                <li>
+                  <Link
+                    href="/"
+                    className="text-white/90 hover:text-white text-sm sm:text-base font-light hover:-translate-y-0.5 transition-all duration-300 relative group"
+                  >
+                    Home
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/technology"
+                    className="text-white/90 hover:text-white text-sm sm:text-base font-light hover:-translate-y-0.5 transition-all duration-300 relative group"
+                  >
+                    Technology
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/about"
+                    className="text-white/90 hover:text-white text-sm sm:text-base font-light hover:-translate-y-0.5 transition-all duration-300 relative group"
+                  >
+                    About
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/carrier"
+                    className="text-white/90 hover:text-white text-sm sm:text-base font-light hover:-translate-y-0.5 transition-all duration-300 relative group"
+                  >
+                    Carrier
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                  </Link>
+                </li>
+                <li>
+                  <button
+                    onClick={openSubscriptionModal}
+                    className="text-white/90 hover:text-white text-sm sm:text-base font-light hover:-translate-y-0.5 transition-all duration-300 relative group px-0 py-0 bg-transparent border-none"
+                  >
+                    Subscribe
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                  </button>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </nav>
 
-      <style jsx>{`
-        .navbar {
-          background-color: rgba(0, 0, 0, 0.95);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-          padding-inline: clamp(1rem, 4vw, 2rem);
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          z-index: 1000;
-          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-          box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
-          /* Removed all loading animations - navbar appears instantly */
-          transform: translateY(0);
-          opacity: 1;
-        }
-
-        .navContainer {
-          max-inline-size: 75rem;
-          margin-inline: auto;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          block-size: 4.375rem;
-        }
-
-        .navLeft {
-          display: flex;
-          align-items: center;
-          /* Removed loading animation - appears instantly */
-          transform: translateX(0);
-          opacity: 1;
-        }
-
-        .navRight {
-          display: flex;
-          align-items: center;
-        }
-
-        .navLinks {
-          display: flex;
-          align-items: center;
-          gap: clamp(1rem, 3vw, 2rem);
-          list-style: none;
-          margin: 0;
-          padding: 0;
-        }
-
-        .navItem {
-          /* Removed loading animation - appears instantly */
-          transform: translateY(0);
-          opacity: 1;
-        }
-
-        .navLink {
-          color: rgba(255, 255, 255, 0.9);
-          text-decoration: none;
-          font-weight: 300;
-          font-size: clamp(0.875rem, 2vw, 1rem);
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          position: relative;
-          display: inline-block;
-        }
-
-        .navLink::after {
-          content: '';
-          position: absolute;
-          bottom: -4px;
-          left: 0;
-          width: 0;
-          height: 2px;
-          background: linear-gradient(90deg, #ffffff, rgba(255, 255, 255, 0.8));
-          transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .navLink:hover {
-          color: #ffffff;
-          transform: translateY(-2px);
-        }
-
-        .navLink:hover::after {
-          width: 100%;
-        }
-
-        .navLink:focus-visible {
-          outline: 2px solid #ffffff;
-          outline-offset: 2px;
-          border-radius: 2px;
-        }
-
-        .brand {
-          font-size: clamp(1.25rem, 3vw, 1.5rem);
-          font-weight: 600;
-          color: #ffffff;
-          text-decoration: none;
-          letter-spacing: 0.0625em;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          position: relative;
-        }
-
-        .brand::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: -5px;
-          right: -5px;
-          bottom: 0;
-          background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2));
-          opacity: 0;
-          border-radius: 4px;
-          z-index: -1;
-          transition: opacity 0.3s ease;
-        }
-
-        .brand:hover {
-          color: #ffffff;
-          transform: scale(1.05);
-        }
-
-        .brand:hover::before {
-          opacity: 1;
-        }
-
-        .brand:focus-visible {
-          outline: 2px solid #ffffff;
-          outline-offset: 2px;
-          border-radius: 2px;
-        }
-
-        .subscribeBtn {
-          background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2));
-          color: #ffffff;
-          padding-block: 0.625rem;
-          padding-inline: 1.5rem;
-          border-radius: 0.5rem;
-          font-weight: 400;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          position: relative;
-          overflow: hidden;
-        }
-
-        .subscribeBtn::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: -100%;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-          transition: left 0.5s ease;
-        }
-
-        .subscribeBtn:hover {
-          background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), #ffffff);
-          color: #000000;
-          transform: translateY(-2px) scale(1.02);
-          box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
-        }
-
-        .subscribeBtn:hover::before {
-          left: 100%;
-        }
-
-        .subscribeBtn:hover::after {
-          width: 0;
-        }
-
-        .subscribeBtn:active {
-          transform: translateY(-1px) scale(1.01);
-        }
-
-        .subscribeBtn:focus-visible {
-          outline: 2px solid #ffffff;
-          outline-offset: 2px;
-        }
-
-        /* Enhanced responsiveness */
-        @container (max-width: 30rem) {
-          .navLinks {
-            gap: 0.75rem;
-          }
+      {/* Subscription Modal - Bottom Sheet */}
+      {isSubscriptionOpen && (
+        <div className="fixed inset-0 z-[60]">
+          {/* Transparent overlay for upper content - removed backdrop-blur-sm */}
+          <div className="absolute inset-0 bg-black/40"></div>
           
-          .navbar {
-            padding-inline: 1rem;
-          }
-        }
+          {/* Bottom sheet container */}
+          <div className="absolute bottom-0 left-0 right-0 transform transition-transform duration-500 ease-out animate-slide-up">
+            {/* Modal Content */}
+            <div className="bg-black text-white rounded-t-2xl p-8 w-full relative border-t border-white/10 shadow-2xl">
+              {/* Drag indicator */}
+              <div className="w-12 h-1 bg-white/30 rounded-full mx-auto mb-6"></div>
+              
+              {/* Close Button */}
+              <button
+                onClick={closeSubscriptionModal}
+                className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
+              >
+                <X size={24} />
+              </button>
 
-        /* Smooth scrolling enhancement */
-        @media (prefers-reduced-motion: no-preference) {
-          html {
-            scroll-behavior: smooth;
-          }
-        }
+            {!isSubscribed ? (
+              <>
+                {/* Header */}
+                <h2 className="text-2xl font-bold mb-2 tracking-wide">SUBSCRIBE</h2>
+                <p className="text-gray-300 mb-8">Sign up to receive ZENTARA news and updates.</p>
 
-        /* High contrast mode support */
-        @media (prefers-contrast: high) {
-          .navbar {
-            background-color: rgba(0, 0, 0, 1);
-            border-bottom-width: 2px;
-            border-bottom-color: #ffffff;
-          }
-          
-          .subscribeBtn {
-            border: 2px solid #ffffff;
-            background: #ffffff;
-            color: #000000;
-          }
-        }
+                {/* Form */}
+                <div className="space-y-6">
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium mb-2">
+                      Email *
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full px-4 py-3 bg-transparent border border-gray-600 rounded focus:border-white focus:outline-none transition-colors"
+                      placeholder="Enter your email"
+                    />
+                  </div>
 
-        /* Performance optimizations */
-        .navbar {
-          will-change: auto; /* Removed will-change for transform since no animation */
-        }
+                  <div className="flex items-start space-x-3">
+                    <input
+                      type="checkbox"
+                      id="newsletter"
+                      checked={isChecked}
+                      onChange={(e) => setIsChecked(e.target.checked)}
+                      className="mt-1 w-4 h-4 text-white bg-transparent border border-gray-600 rounded focus:ring-white focus:ring-2"
+                    />
+                    <label htmlFor="newsletter" className="text-sm text-gray-300 leading-relaxed cursor-pointer">
+                      Yes, subscribe me to your newsletter. *
+                    </label>
+                  </div>
 
-        .navLink,
-        .brand,
-        .subscribeBtn {
-          will-change: transform;
-        }
-      `}</style>
+                  <button
+                    onClick={handleSubscribe}
+                    disabled={isLoading || !email || !isChecked}
+                    className="w-full bg-white text-black px-8 py-3 rounded font-medium hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isLoading ? 'Subscribing...' : 'Subscribe'}
+                  </button>
+                </div>
+              </>
+            ) : (
+              /* Success Message */
+              <div className="text-center py-8">
+                <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold mb-2">Successfully Subscribed!</h3>
+                <p className="text-gray-300">Thank you for subscribing to our newsletter.</p>
+              </div>
+            )}
+                      </div>
+          </div>
+        </div>
+      )}
     </>
   );
-};
-
-const styles = {
-  navbar: 'navbar',
-  navContainer: 'navContainer',
-  navLeft: 'navLeft',
-  navLinks: 'navLinks',
-  navLink: 'navLink',
-  navItem: 'navItem',
-  navRight: 'navRight',
-  brand: 'brand',
-  subscribeBtn: 'subscribeBtn'
 };
 
 export default Navbar;

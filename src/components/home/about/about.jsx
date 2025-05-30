@@ -1,6 +1,39 @@
-import React from 'react';
+'use client';
+import React, { useEffect } from 'react';
 
 const VisionAboutSection = () => {
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.3
+    };
+
+    const handleIntersection = (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersection, observerOptions);
+
+    // Observe the section and its animated elements
+    const section = document.querySelector('.vision-section');
+    const animatedElements = document.querySelectorAll('.animate-on-view');
+    
+    if (section) {
+      observer.observe(section);
+    }
+    
+    animatedElements.forEach(element => {
+      observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
       <style>
@@ -238,11 +271,47 @@ const VisionAboutSection = () => {
               box-shadow: none !important;
             }
           }
+
+          .vision-content {
+            opacity: 0;
+          }
+
+          .vision-content.animate {
+            animation: fadeInLeft 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+          }
+
+          .car-container {
+            opacity: 0;
+          }
+
+          .car-container.animate {
+            animation: fadeInRight 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
+          }
+
+          .vision-line {
+            opacity: 0;
+          }
+
+          .vision-line.animate {
+            animation: lineGrow 1s ease-out 0.2s forwards;
+          }
+
+          .vision-label.animate {
+            animation: fadeInLeft 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
+          }
+
+          .vision-title.animate {
+            animation: fadeInLeft 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s forwards;
+          }
+
+          .vision-description.animate {
+            animation: fadeInLeft 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards;
+          }
         `}
       </style>
 
       <section 
-        className="min-h-screen flex items-center justify-center py-16"
+        className="vision-section h-screen flex items-center justify-center py-8"
         style={{
           background: 'linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%)',
           position: 'relative',
@@ -252,14 +321,14 @@ const VisionAboutSection = () => {
         {/* Background grain texture */}
         <div className="background-grain" />
         
-        {/* Ambient light effects */}
+        {/* Ambient light effects - reduced sizes */}
         <div 
           style={{
             position: 'absolute',
             top: '20%',
             left: '10%',
-            width: '300px',
-            height: '300px',
+            width: '200px',
+            height: '200px',
             background: 'radial-gradient(circle, rgba(255,255,255,0.02) 0%, transparent 70%)',
             borderRadius: '50%',
             animation: 'spotlightPulse 8s ease-in-out infinite',
@@ -271,8 +340,8 @@ const VisionAboutSection = () => {
             position: 'absolute',
             bottom: '20%',
             right: '15%',
-            width: '400px',
-            height: '400px',
+            width: '300px',
+            height: '300px',
             background: 'radial-gradient(circle, rgba(255,255,255,0.015) 0%, transparent 70%)',
             borderRadius: '50%',
             animation: 'spotlightPulse 12s ease-in-out infinite reverse',
@@ -280,31 +349,28 @@ const VisionAboutSection = () => {
           }}
         />
 
-        <div className="vision-container max-w-7xl mx-auto px-8 flex items-center justify-between gap-16">
+        <div className="vision-container max-w-6xl mx-auto px-6 flex items-center justify-between gap-8">
           {/* Left Side - Vision Content */}
           <div 
-            className="vision-content flex-1 max-w-xl"
-            style={{ animation: 'fadeInLeft 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)' }}
+            className="vision-content flex-1 max-w-lg animate-on-view"
           >
             {/* Vision Line */}
-            <div className="vision-line" />
+            <div className="vision-line animate-on-view" style={{ height: '60px', marginBottom: '20px' }} />
             
             {/* Vision Label */}
             <div 
-              className="vision-label text-white text-sm font-medium tracking-[0.3em] mb-8 opacity-90"
-              style={{ animation: 'fadeInLeft 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s both' }}
+              className="vision-label text-white text-sm font-medium tracking-[0.3em] mb-4 opacity-90 animate-on-view"
             >
               VISION
             </div>
 
             {/* Main Title */}
             <h1 
-              className="vision-title text-white leading-tight mb-12"
+              className="vision-title text-white leading-tight mb-6 animate-on-view"
               style={{ 
-                fontSize: '4.5rem',
+                fontSize: '3.5rem',
                 fontWeight: '300',
-                letterSpacing: '1px',
-                animation: 'fadeInLeft 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s both'
+                letterSpacing: '1px'
               }}
             >
               We're Changing the<br />
@@ -314,40 +380,37 @@ const VisionAboutSection = () => {
 
             {/* Description */}
             <p 
-              className="vision-description text-lg leading-relaxed max-w-lg"
+              className="vision-description text-base leading-relaxed max-w-lg animate-on-view"
               style={{ 
-                animation: 'fadeInLeft 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s both',
-                lineHeight: '1.8'
+                lineHeight: '1.6'
               }}
             >
               We're revolutionizing the automotive industry through cutting-edge innovation, 
               sustainable technology, and uncompromising design excellence. Our vision extends 
-              beyond transportation – we're creating the future of mobility that connects people, 
-              communities, and possibilities.
+              beyond transportation – we're creating the future of mobility.
             </p>
           </div>
 
           {/* Right Side - Car Image */}
           <div 
-            className="flex-1 car-container"
+            className="flex-1 car-container animate-on-view"
             style={{ 
-              animation: 'fadeInRight 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s both', 
               position: 'relative', 
-              minHeight: '500px',
+              minHeight: '400px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center'
             }}
           >
-            {/* Enhanced Circular Spotlight with multiple layers */}
+            {/* Enhanced Circular Spotlight with multiple layers - reduced sizes */}
             <div 
               className="car-spotlight-bg"
               style={{
                 position: 'absolute',
                 top: '50%',
                 left: '50%',
-                width: '700px',
-                height: '700px',
+                width: '500px',
+                height: '500px',
                 transform: 'translate(-50%, -50%)',
                 background: 'radial-gradient(circle, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.15) 40%, rgba(255,255,255,0.05) 70%, transparent 100%)',
                 borderRadius: '50%',
@@ -358,14 +421,14 @@ const VisionAboutSection = () => {
               }}
             />
             
-            {/* Secondary spotlight layer */}
+            {/* Secondary spotlight layer - reduced size */}
             <div 
               style={{
                 position: 'absolute',
                 top: '50%',
                 left: '50%',
-                width: '500px',
-                height: '500px',
+                width: '400px',
+                height: '400px',
                 transform: 'translate(-50%, -50%)',
                 background: 'radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.03) 60%, transparent 100%)',
                 borderRadius: '50%',
@@ -382,7 +445,7 @@ const VisionAboutSection = () => {
                 className="car-image w-full h-auto"
                 style={{
                   maxWidth: '100%',
-                  width: '500px',
+                  width: '400px',
                   filter: 'brightness(0.95) contrast(1.2) saturate(1.1) hue-rotate(-5deg)',
                   zIndex: 1,
                   position: 'relative'

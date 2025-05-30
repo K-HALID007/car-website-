@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function ZentaraManufacturing() {
   const [isVisible, setIsVisible] = useState(false);
@@ -9,6 +10,7 @@ export default function ZentaraManufacturing() {
   const [showBackground, setShowBackground] = useState(false);
   const [isInView, setIsInView] = useState(false);
   const sectionRef = useRef(null);
+  const router = useRouter();
 
   useEffect(() => {
     setIsClient(true);
@@ -200,7 +202,10 @@ export default function ZentaraManufacturing() {
               <div className={`pt-4 transform transition-all duration-1000 delay-900 ${
                 isVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
               }`}>
-                <button className="group relative inline-flex items-center px-10 py-4 border-2 border-white text-white hover:text-black transition-all duration-500 rounded-xl font-semibold overflow-hidden">
+                <button 
+                  onClick={() => router.push('/about')}
+                  className="group relative inline-flex items-center px-10 py-4 border-2 border-white text-white hover:text-black transition-all duration-500 rounded-xl font-semibold overflow-hidden"
+                >
                   <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                   <span className="relative z-10 flex items-center">
                     Learn More

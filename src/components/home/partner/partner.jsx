@@ -1,9 +1,11 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { Zap, Settings, Cpu, Users } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 const Partners = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setIsLoaded(true);
@@ -129,7 +131,10 @@ const Partners = () => {
 
           {/* Bottom CTA Section */}
           <div className={`text-center mt-20 transition-all duration-1000 delay-1000 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-            <button className="group bg-transparent border-2 border-white text-white px-12 py-4 rounded-full font-medium hover:bg-white hover:text-black transform transition-all duration-300 hover:scale-105 relative overflow-hidden">
+            <button 
+              onClick={() => router.push('/carrier')}
+              className="group bg-transparent border-2 border-white text-white px-12 py-4 rounded-full font-medium hover:bg-white hover:text-black transform transition-all duration-300 hover:scale-105 relative overflow-hidden"
+            >
               <span className="relative z-10">Join Our Network</span>
               <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
             </button>

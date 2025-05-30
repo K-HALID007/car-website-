@@ -402,7 +402,7 @@ const Hero = () => {
         `}
       </style>
       
-      <section ref={heroRef} style={heroStyles.hero} className="hero-section">
+      <section id="/" ref={heroRef} style={heroStyles.hero} className="hero-section">
         <video
           style={heroStyles.videoBg}
           src="/car2.mp4"
