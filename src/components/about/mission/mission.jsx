@@ -298,29 +298,29 @@ const Mission = () => {
         }
       `}</style>
 
-      <section className="bg-white text-black min-h-screen py-12">
+      <section className="bg-white text-black min-h-screen py-2">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             {/* Main Content Grid */}
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start pt-24 md:pt-32">
+            <div className="grid lg:grid-cols-2 gap-4 lg:gap-6 items-start pt-4 md:pt-6">
               
               {/* Left Side - Content */}
               <div className="order-2 lg:order-1">
-                <div className="relative pl-4 border-l-2 border-black mt-12 md:mt-16 -ml-28">
+                <div className="relative pl-4 border-l-2 border-black mt-4 md:mt-6 -ml-28">
                   {/* Mission Header */}
-                  <div className="mb-8">
+                  <div className="mb-2">
                     <h1 className="mission-text text-2xl md:text-2xl font-light tracking-wide text-black">
                       Our Mission
                     </h1>
                   </div>
 
-                  <div className="mb-4">
+                  <div className="mb-2">
                     <h2 className="mission-text text-2xl md:text-2xl font-light mb-2 text-black tracking-wide">
                       Driving Innovation Forward
                     </h2>
                   </div>
 
-                  <div className="mission-text space-y-4 text-sm leading-relaxed text-gray-700 font-light max-w-md pr-12">
+                  <div className="mission-text space-y-2 text-sm leading-relaxed text-gray-700 font-light max-w-md pr-6">
                     <p>
                       At Zentara, our mission transcends traditional automotive boundaries. 
                       We are dedicated to <span className="highlight-text font-normal">revolutionizing mobility</span> through 
@@ -335,7 +335,7 @@ const Mission = () => {
                   </div>
 
                   {/* Mission Stats */}
-                  <div className="mission-text grid grid-cols-3 gap-3 mt-6 pt-4 border-t border-gray-100">
+                  <div className="mission-text grid grid-cols-3 gap-3 mt-3 pt-2 border-t border-gray-100">
                     <div>
                       <div className="text-xl md:text-2xl font-light text-black mb-0.5">15+</div>
                       <div className="text-xs text-gray-600 font-light">Years Experience</div>
@@ -351,7 +351,7 @@ const Mission = () => {
                   </div>
 
                   {/* Call to Action */}
-                  <div className="mt-6">
+                  <div className="mt-3">
                     <button className="mission-text px-4 py-2 text-black font-light border border-black rounded-none hover:bg-black hover:text-white transition-colors duration-300 text-xs">
                       Discover Our Story
                     </button>
@@ -361,11 +361,11 @@ const Mission = () => {
 
               {/* Right Side - Image Section */}
               <div className="order-1 lg:order-2">
-                <div className="relative h-[400px] lg:h-[500px] max-w-xl w-[95%] ml-38">
+                <div className="relative h-[300px] lg:h-[350px] max-w-xl w-[95%] ml-38">
                   <img 
                     src="/10.jpg"
                     alt="Automotive Service Professional"
-                    className="w-full h-full object-contain object-center scale-95 rounded-4xl"
+                    className="w-full h-full object-contain object-center scale-90 rounded-4xl"
                     style={{ background: 'transparent' }}
                   />
                 </div>
@@ -373,13 +373,13 @@ const Mission = () => {
 
             </div>
           </div>
-          <div className="w-full mt-28">
+          <div className="w-full mt-12">
             <hr className="border-t border-black w-full" />
           </div>
 
           {/* Timeline Section */}
-          <div className="max-w-6xl mx-auto mt-20">
-            <div className="mb-12 pl-4">
+          <div className="max-w-6xl mx-auto mt-8">
+            <div className="mb-6 pl-4">
               <h2 className="mission-text text-2xl md:text-2xl font-light text-black tracking-wide">
                 Our Journey So Far
               </h2>
@@ -388,7 +388,7 @@ const Mission = () => {
             {/* Timeline Grid */}
             <div className="relative">
               {/* First Timeline Item - 2010 */}
-              <div className="flex justify-start mb-6">
+              <div className="flex justify-start mb-3">
                 <div className="timeline-card max-w-xl w-[90%] slide-in-left timeline-animate">
                   <div className="timeline-year">2010</div>
                   <div className="timeline-title">ZENTARA IS FOUNDED</div>
@@ -402,7 +402,7 @@ const Mission = () => {
               </div>
 
               {/* Navigation Arrows with Connecting Line */}
-              <div className="relative my-8">
+              <div className="relative my-4">
                 {/* Connecting Line */}
                 <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 w-full">
                   <hr className="border-t border-black" />
@@ -424,7 +424,7 @@ const Mission = () => {
               </div>
 
               {/* Second Timeline Item - 2015 */}
-              <div className="flex justify-end mb-6">
+              <div className="flex justify-end mb-3">
                 <div className="timeline-card max-w-xl w-[90%] slide-in-right timeline-animate">
                   <div className="timeline-year">2015</div>
                   <div className="timeline-title">PIONEERING ELECTRIC INNOVATION</div>

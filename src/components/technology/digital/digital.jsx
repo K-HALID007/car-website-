@@ -53,7 +53,7 @@ const DigitalProducts = () => {
 
           {/* Autonomous Suite Card */}
           <div className="bg-white/90 backdrop-blur-md border border-gray-300/50 rounded-xl p-4 space-y-3 shadow-xl relative">
-            <div className="absolute left-0 top-4 bottom-4 w-1 bg-purple-400 rounded-full"></div>
+            <div className="absolute right-0 top-4 bottom-4 w-1 bg-purple-400 rounded-full"></div>
             
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-400 rounded-lg flex items-center justify-center">
@@ -143,6 +143,11 @@ const DigitalProducts = () => {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Bottom Horizontal Line */}
+        <div className="w-full px-16 mt-8">
+          <hr className="border-t border-black" />
         </div>
       </div>
     </section>

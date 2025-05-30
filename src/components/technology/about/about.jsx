@@ -117,10 +117,7 @@ const About = () => {
               LOW EMISSIONS & EFFICIENCY
             </h3>
             <p className={`text-white/80 leading-relaxed transition-all duration-700 delay-2300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-              I'm a paragraph. Click here to add your own text and edit me. It's easy. 
-              Just click "Edit Text" or double click me to add your own content and 
-              make changes to the font. I'm a great place for you to tell a story and 
-              let your users know a little more about you.
+              Zentara's advanced electric powertrain achieves zero direct emissions while maximizing energy efficiency. Our regenerative braking system recovers up to 95% of kinetic energy, while the aerodynamic design reduces energy consumption. The high-capacity battery utilizes sustainable materials and smart thermal management for optimal performance in all conditions.
             </p>
           </div>
         </div>
